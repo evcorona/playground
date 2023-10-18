@@ -17,11 +17,17 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.x
+          run_install: true
+
       - name: Setup Node.js Environment
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          package-manager: 'pnpm'
+          cache: 'pnpm'
 
       - name: Install Node.js dependencies
         run: pnpm i
