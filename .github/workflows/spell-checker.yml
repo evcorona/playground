@@ -38,10 +38,10 @@ jobs:
 
       - name: Count errors
         run: |
-          error_count=$(echo "${{ steps.cspell.outputs.cspell_output }}" | grep -c "Misspelled")
+          error_count=$(echo "${{ steps.cspell.outputs.cspell_output }}" | grep -c "Unknown")
           echo "Total errors: $error_count"
           if [ "$error_count" -gt 5 ]; then
-            echo "::error CSpell errors exceed the limit. Failing the action."
+            echo "::error CSpell errors exceed the limit. Failing the action"
             echo "::error New cspell errors created. Please check your code"
             exit 1
           fi
