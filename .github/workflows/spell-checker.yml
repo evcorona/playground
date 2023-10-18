@@ -34,6 +34,7 @@ jobs:
 
       - name: Run cspell
         run: pnpm spell-checker
+        continue-on-error: true
 
       - name: Count errors
         run: |
