@@ -1,0 +1,19 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "spell-checker": "cspell lint --quiet",
+    "spell-checker:words": "cspell --quiet --unique --words-only"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cspell/dict-es-es": "^2.2.7",
+    "cspell": "^7.3.8"
+  }
+}

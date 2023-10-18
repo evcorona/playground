@@ -1,0 +1,38 @@
+name: Code Spell Checker
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  check-code-spell:
+    name: Check Spelling
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          package-manager: 'pnpm'
+
+      - name: Install Node.js dependencies
+        run: pnpm i
+
+      - name: Run cspell
+        run: pnpm spell-checker || true
+        continue-on-errors: true
+
+      - name: Count errors
+        run: |
+          error_count=$(echo "${{ steps.cspell.outputs.cspell_output }}" | grep -c "Misspelled")
+          echo "Total errors: $error_count"
+          if [ "$error_count" -gt 1 ]; then
+            echo "CSpell errors exceed the limit. Failing the action."
+            echo "New cspell errors created. Please check your code"
+            exit 1
+          fi
