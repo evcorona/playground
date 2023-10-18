@@ -28,14 +28,9 @@ jobs:
           version: 8.x
           run_install: true
 
-      - name: Run cspell
-        id: cspell
-        run: pnpm spell-checker
-        continue-on-error: true
-
       - name: Extract and Count Errors
         run: |
-          cspell_output= echo "$(pnpm spell-checker)"
+          cspell_output="$(pnpm spell-checker)"
           echo "Test: $cspell_output"
           issues_found=$(echo "$cspell_output" | awk -F'Issues found: ' '{print $2}' | cut -d' ' -f1)
           echo "Issues found: $issues_found"
