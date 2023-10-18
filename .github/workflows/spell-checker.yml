@@ -29,6 +29,7 @@ jobs:
           run_install: true
 
       - name: Run cspell
+        id: cspell
         run: pnpm spell-checker
         continue-on-error: true
 
@@ -38,7 +39,7 @@ jobs:
           echo "Test: $cspell_output"
           issues_found=$(echo "$cspell_output" | awk -F'Issues found: ' '{print $2}' | cut -d' ' -f1)
           echo "Issues found: $issues_found"
-          if [ -n "$issues_found" ] && [ "$issues_found" -gt 4 ]; then
+          if [ -n "$issues_found" ] && [ "$issues_found" -gt 2 ]; then
             echo "::error CSpell errors exceed the limit. Failing the action."
             echo "::error New cspell errors created. Please check your code"
             exit 1
