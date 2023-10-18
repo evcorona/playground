@@ -6,8 +6,8 @@
   "scripts": {
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "spell-checker": "cspell lint --quiet",
-    "spell-checker:words": "cspell --quiet --unique --words-only"
+    "spell-checker": "cspell lint --no-progress",
+    "spell-checker:words": "cspell --no-progress --unique --words-only"
   },
   "keywords": [],
   "author": "",
