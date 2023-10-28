@@ -1,0 +1,29 @@
+name: Create Develop to Main Pull Request
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - develop
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          route: POST /repos/:owner/:repo/pull
+          owner: ${{github.repository_owner}}
+          repo: ${{github.event.repository.name}}
+          title: 'Update Main from Develop'
+          head: 'develop'
+          base: 'main'
+          token: ${{secrets.GITHUB_TOKEN}}
+          body: |
+            {{github.event.pull_request.body}}
+            {{github.event.pull_request.url}}
