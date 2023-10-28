@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create Pull Request
-        uses: octokit/request-action@v2.x
+        uses: peter-evans/create-pull-request@v5.0.2
         with:
           route: POST /repos/:owner/:repo/pull
           owner: ${{github.repository_owner}}
@@ -24,11 +24,6 @@ jobs:
           head: 'develop'
           base: 'main'
           token: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Update Pull Request Body
-        uses: peter-evans/create-pull-request@v5.0.2
-        with:
           body: |
             {{github.event.pull_request.body}}
-
-            - {{github.event.pull_request.url}}
+            {{github.event.pull_request.url}}
